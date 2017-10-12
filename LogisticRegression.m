@@ -3,7 +3,6 @@ function [ params, time, gradient_value ] = LogisticRegression( features, labels
   tic;
   data_size = size(features, 1);
   [ftr_t, nl_t, invl_t, ftr_t_x_lbl] = PreCompute(features, labels);
-  % w'x'xw - w'x'y - y'xw + y'y
   function [cost, gradient] = Wrapper(x)
     cost = (nl_t * log(features*x) - invl_t * log(1 - features*x)) / n + lambda*(x*x.')/2;
     if nargout > 1
