@@ -7,7 +7,7 @@ function [ params, time, gradient_value ] = LinearRegression( features, labels, 
   function [cost, gradient] = Wrapper(x)
     cost = (x.'*ftr_t_x_ftr*x - x.'*ftr_t_x_lbl - lbl_t_x_ftr*x + lbl_t_x_lbl)/(2*data_size) + (lambda/2)*x.'*x;
     if nargout > 1
-      gradient = 1/data_size*(ftr_t_x_ftr*x - ftr_t_x_lbl) + lambda*x;
+      gradient = (ftr_t_x_ftr*x - ftr_t_x_lbl) / data_size + lambda*x;
     end
   end
   options = optimoptions('fminunc','GradObj','on');
@@ -15,8 +15,7 @@ function [ params, time, gradient_value ] = LinearRegression( features, labels, 
   x0(1, 1) = 1;
   params = fminunc(@Wrapper, x0, options);
   time = toc;
-  linear_gradient = @(x)(ftr_t_x_ftr*x - ftr_t_x_lbl)/data_size + lambda*x;
-  gradient_value = linear_gradient(params);
+  gradient_value = (ftr_t_x_ftr * params - ftr_t_x_lbl) / data_size + lambda * params;
 end
 
 function [ ftr_t_x_ftr, ftr_t_x_lbl, lbl_t_x_ftr, lbl_t_x_lbl ] = PreCompute( features, labels )

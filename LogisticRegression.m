@@ -1,5 +1,5 @@
-function [ params ] = LinearRegress( features, labels, lambda )
-%LINEARREGRESS Performance linear regression on the given data
+function [ params, time, gradient_value ] = LogisticRegression( features, labels, lambda )
+%LOGISTICREGRESSION Performance logistic regression on the given data
   tic;
   data_size = size(features, 1);
   [ftr_t, nl_t, invl_t, ftr_t_x_lbl] = PreCompute(features, labels);
@@ -14,7 +14,8 @@ function [ params ] = LinearRegress( features, labels, lambda )
   x0 = zeros(size(features, 2), 1);
   x0(1, 1) = 1;
   params = fminunc(@Wrapper, x0, options);
-  toc;
+  time = toc;
+  gradient_value = ftr_t * (Sigmoid(features * params) - labels) / n + lambda * params;
 end
 
 function [ ftr_t, nl_t, invl_t, ftr_t_x_lbl ] = PreCompute( features, labels )
