@@ -5,5 +5,5 @@ function [ params, time, gradient_value, error_bound ] = LinearRegressionSample(
   fsample = ftr(rand_perm(1:sample_size), :);
   lsample = lbl(rand_perm(1:sample_size), :);
   [ params, time, gradient_value ] = LinearRegression(fsample, lsample, lambda);
-  [ error_bound ] = LinearRegressionSampleError(fsample, lsample, params, lambda, probablity);
+  error_bound = LinearRegressionSampleError(fsample, lsample, params, lambda, probablity);
 end

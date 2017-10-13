@@ -1,4 +1,4 @@
-function [ error_bound ] = LinearRegressionSampleError( fsample, lsample, params, lambda, probablity )
+function [ error_bound ] = LinearRegressionSampleError( fsample, lsample, params, lambda, probability )
   sample_size = size(fsample, 1);
   feature_size = size(fsample, 2);
   weighted_fsample = bsxfun(@times, fsample, fsample * params - lsample);
