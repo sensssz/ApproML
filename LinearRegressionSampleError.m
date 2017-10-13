@@ -1,8 +1,7 @@
-function [ error_bound ] = LinearRegressionSampleError( fsample, lsample, params, lambda, probability )
+function [ error_bound ] = LinearRegressionSampleError( fsample, lsample, params, probability )
   sample_size = size(fsample, 1);
   feature_size = size(fsample, 2);
   weighted_fsample = bsxfun(@times, fsample, fsample * params - lsample);
-  cvector = std(weighted_fsample);
 
   % Yongjoo: a new procedure based on approximation to a second-order form
   sample_covariance = weighted_fsample' * weighted_fsample / sample_size;     % sample covariance for an error
