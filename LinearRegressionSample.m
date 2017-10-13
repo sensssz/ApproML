@@ -4,6 +4,6 @@ function [ params, time, gradient_value, epsilon, gamma_value ] = LinearRegressi
   rand_perm = randperm(num_examples);
   fsample = ftr(rand_perm(1:sample_size), :);
   lsample = lbl(rand_perm(1:sample_size), :);
-  [ params, time, gradient_value ] = LinearRegress(fsample, lsample, lambda);
+  [ params, time, gradient_value ] = LinearRegression(fsample, lsample, lambda);
   [ epsilon, gamma_value ] = LinearRegressionSampleError(fsample, lsample, params, lambda, probablity);
 end
