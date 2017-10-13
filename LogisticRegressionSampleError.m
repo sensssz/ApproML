@@ -1,4 +1,4 @@
-function [ error_bound ] = LogisticRegressionSampleError( fsample, lsample, params, lambda, probablity )
+function [ error_bound, cc ] = LogisticRegressionSampleError( fsample, lsample, params, lambda, probablity )
   sample_size = size(fsample, 1);
   feature_size = size(fsample, 2);
   sigmoid_data = sigmoid(fsample * params);
