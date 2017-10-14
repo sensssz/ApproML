@@ -1,4 +1,4 @@
-function [ linear_params, linear_error_bounds, linear_ccs, logistic_params, logistic_error_bounds, logistic_ccs ] = CollectTraingsStat( trainf, trainl )
+function [ linear_params, linear_error_bounds, linear_ccs, logistic_params, logistic_error_bounds, logistic_ccs ] = CollectTrainingsStat( trainf, trainl )
   sampling_rates = [0.01 0.02 0.05 0.08 0.1 0.2 0.5 0.8 1];
   num_sampling_rates = size(sampling_rates, 2);
   [linear_params, linear_training_times, ~, linear_error_bounds, linear_ccs] = CollectTrainingStat(@LinearRegressionSample, trainf, trainl, sampling_rates);
