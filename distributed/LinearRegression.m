@@ -3,7 +3,6 @@ function [ params, time, gradient_value ] = LinearRegression( features, labels, 
   tic;
   data_size = size(features, 1);
   [ftr_t_x_ftr, ftr_t_x_lbl, lbl_t_x_ftr, lbl_t_x_lbl] = PreCompute(features, labels);
-  % w'x'xw - w'x'y - y'xw + y'y
   function [cost, gradient] = Wrapper(x)
     cost = (x.'*ftr_t_x_ftr*x - x.'*ftr_t_x_lbl - lbl_t_x_ftr*x + lbl_t_x_lbl)/(2*data_size) + (lambda/2)*x.'*x;
     if nargout > 1
