@@ -8,3 +8,5 @@ logistic_training_times = [logistic_training_times logistic_full_time];
 linear_training_times = [linear_training_times linear_full_time];
 PlotTrainingTime(sampling_rates, logistic_training_times, 'logistic');
 PlotTrainingTime(sampling_rates, linear_training_times, 'linear');
+[logistic_prediction_errors, logistic_model_errors] = EmpiricalErrors(logistic_full_params, logistic_params, trainf);
+[linear_prediction_errors, linear_model_errors] = EmpiricalErrors(linear_full_params, linear_params, trainf);
