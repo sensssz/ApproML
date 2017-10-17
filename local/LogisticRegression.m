@@ -10,7 +10,7 @@ function [ params, time, gradient_value ] = LogisticRegression( features, labels
     end
   end
   options = optimoptions('fminunc','GradObj','on');
-  x0 = randn(size(features, 2), 1) * 0.05;
+  x0 = randn(size(features, 2), 1) * 5e-7;
   params = fminunc(@Wrapper, x0, options);
   time = toc;
   gradient_value = (ftr_t * sigmoid(features * params) - ftr_t_x_lbl) / data_size + lambda * params;
