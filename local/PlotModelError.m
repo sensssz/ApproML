@@ -1,4 +1,4 @@
-function PlotTrainingTime( sampling_rates, original_model, model_errors, prefix )
+function PlotModelError( sampling_rates, original_model, model_errors, prefix )
   close(findall(0,'type','figure','name','flashing'));
   num_sampling_rates = size(sampling_rates, 2);
   [~, sorted_indices] = sort(abs(original_model), 'descend');

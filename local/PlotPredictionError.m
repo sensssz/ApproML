@@ -1,4 +1,4 @@
-function PlotTrainingTime( sampling_rates, prediction_errors, prefix )
+function PlotPredictionError( sampling_rates, prediction_errors, prefix )
   close(findall(0,'type','figure','name','flashing'));
   num_sampling_rates = size(sampling_rates, 2);
   plot(prediction_errors);
