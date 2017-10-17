@@ -1,4 +1,4 @@
-function [ params, time, gradient_value ] = LinearRegression( features, labels, lambda )
+function [ params, time, gradient_value ] = LinearRegressionDistributed( features, labels, lambda )
 %LINEARREGRESSION Performance linear regression on the given data
   tic;
   data_size = size(features, 1);
@@ -6,11 +6,13 @@ function [ params, time, gradient_value ] = LinearRegression( features, labels, 
   % w'x'xw - w'x'y - y'xw + y'y
   function [cost, gradient] = Wrapper(x)
     cost = (x.'*ftr_t_x_ftr*x - x.'*ftr_t_x_lbl - lbl_t_x_ftr*x + lbl_t_x_lbl)/(2*data_size) + (lambda/2)*x.'*x;
+    cost = gather(cost);
     if nargout > 1
       gradient = (ftr_t_x_ftr*x - ftr_t_x_lbl) / data_size + lambda*x;
+      gradient = gather(gradient);
     end
   end
-  options = optimoptions('fminunc','GradObj','on');
+  options = optimoptions('fminunc','GradObj','on','UseParallel','Always');
   x0 = zeros(size(features, 2), 1);
   x0(1, 1) = 1;
   params = fminunc(@Wrapper, x0, options);

@@ -1,15 +1,17 @@
-function [ params, time, gradient_value ] = LogisticRegression( features, labels, lambda )
+function [ params, time, gradient_value ] = LogisticRegressionDistributed( features, labels, lambda )
 %LOGISTICREGRESSION Performance logistic regression on the given data
   tic;
   data_size = size(features, 1);
   [ftr_t, nl_t, invl_t, ftr_t_x_lbl] = PreCompute(features, labels);
   function [cost, gradient] = Wrapper(x)
     cost = (nl_t * log(sigmoid(features*x)) - invl_t * log(1 - sigmoid(features*x))) / data_size + lambda*(x.'*x)/2;
+    cost = gather(cost);
     if nargout > 1
       gradient = (ftr_t * sigmoid(features*x) - ftr_t_x_lbl) / data_size + lambda*x;
+      gradient = gather(gradient);
     end
   end
-  options = optimoptions('fminunc','GradObj','on');
+  options = optimoptions('fminunc','GradObj','on','UseParallel','Always');
   x0 = randn(size(features, 2), 1) * 5e-7;
   params = fminunc(@Wrapper, x0, options);
   time = toc;
