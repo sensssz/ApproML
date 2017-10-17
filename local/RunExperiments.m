@@ -10,3 +10,7 @@ PlotTrainingTime([sampling_rates 1], logistic_training_times, 'logistic');
 PlotTrainingTime([sampling_rates 1], linear_training_times, 'linear');
 [logistic_prediction_errors, logistic_model_errors] = LogisticEmpiricalErrors(logistic_full_params, logistic_params, trainf);
 [linear_prediction_errors, linear_model_errors] = LinearEmpiricalErrors(linear_full_params, linear_params, trainf);
+PlotPredictionError(sampling_rates, logistic_prediction_errors, 'logistic');
+PlotPredictionError(sampling_rates, linear_prediction_errors, 'linear');
+PlotModelError(sampling_rates, logistic_model_errors, 'logistic');
+PlotModelError(sampling_rates, linear_model_errors, 'linear');
