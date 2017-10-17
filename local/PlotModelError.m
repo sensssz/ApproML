@@ -3,7 +3,7 @@ function PlotTrainingTime( sampling_rates, original_model, model_errors, prefix 
   num_sampling_rates = size(sampling_rates, 2);
   [~, sorted_indices] = sort(abs(original_model), 'descend');
   for i = 1:3
-    original_index = sorted_indices(i, i);
+    original_index = sorted_indices(i, 1);
     plot(model_errors(original_index:original_index, :));
     xticklabels = cell(num_sampling_rates);
     xticklabels = xticklabels(1, :);
@@ -13,7 +13,7 @@ function PlotTrainingTime( sampling_rates, original_model, model_errors, prefix 
     set(gca, 'xticklabel', xticklabels);
     xlabel('Sampling Rate');
     ylabel(['Model Error for ', num2str(i), OrdinalSuffix(i) ,' dimension (%)']);
-    saveas(gcf, strcat(prefix, '_model_error.png'));
+    saveas(gcf, strcat(prefix, '_model_error', num2str(i), '.png'));
     close(findall(0,'type','figure','name','flashing'));
   end
 end
