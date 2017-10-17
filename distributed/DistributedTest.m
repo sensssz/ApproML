@@ -1,9 +1,9 @@
 lambda = 1e-6;
-dataset = csvread('~/ApproML/HIGGS-1G.csv');
-num_examples = size(dataset, 1);
-num_features = size(dataset, 2);
-trainf = [dataset(:, 1:num_features - 1) ones(num_examples, 1)];
-trainl = dataset(:, num_features-1:num_features);
+higgs = csvread('~/ApproML/HIGGS-1G.csv');
+num_examples = size(higgs, 1);
+num_features = size(higgs, 2);
+trainf = [higgs(:, 1:num_features - 1) ones(num_examples, 1)];
+trainl = higgs(:, num_features-1:num_features);
 [local_params, local_time, local_gvalue] = LogisticRegression(trainf, trainl, lambda);
 
 % This assumes a multinode job
