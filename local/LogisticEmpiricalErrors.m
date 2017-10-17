@@ -8,6 +8,6 @@ function [ logistic_prediction_errors, logistic_model_errors ] = EmpiricalErrors
     model = models(:, i:i);
     prediction = sigmoid(testset * model) > 0.5;
     logistic_prediction_errors(1, i) = sum(prediction ~= original_prediction) / num_tests;
-    logistic_model_errors = [logistic_model_errors abs(model - original_model ./ original_model)];
+    logistic_model_errors = [logistic_model_errors abs((model - original_model) ./ original_model)];
   end
 end

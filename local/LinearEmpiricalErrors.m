@@ -8,6 +8,6 @@ function [ linear_prediction_errors, linear_model_errors ] = EmpiricalErrors( or
     model = models(:, i:i);
     predictions = testset * model;
     linear_prediction_errors(1, i) = abs(mean((predictions - original_prediction) ./ original_prediction));
-    linear_model_errors = [linear_model_errors abs(model - original_model ./ original_model)];
+    linear_model_errors = [linear_model_errors abs((model - original_model) ./ original_model)];
   end
 end
