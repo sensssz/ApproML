@@ -7,8 +7,8 @@ function PlotTrainingTime( sampling_rates, original_model, model_errors, prefix 
     plot(model_errors(original_index:original_index, :));
     xticklabels = cell(num_sampling_rates);
     xticklabels = xticklabels(1, :);
-    for i = 1:num_sampling_rates
-        xticklabels{i} = strcat(num2str(sampling_rates(1, i) * 100), '%');
+    for j = 1:num_sampling_rates
+        xticklabels{j} = strcat(num2str(sampling_rates(1, j) * 100), '%');
     end
     set(gca, 'xticklabel', xticklabels);
     xlabel('Sampling Rate');
