@@ -1,4 +1,4 @@
-function [ logistic_prediction_errors, logistic_model_errors ] = EmpiricalErrors( original_model, models, testset )
+function [ logistic_prediction_errors, logistic_model_errors ] = LogisticEmpiricalErrors( original_model, models, testset )
   original_prediction = sigmoid(testset * original_model) > 0.5;
   num_tests = size(testset, 1);
   num_models = size(models, 2);
