@@ -13,7 +13,7 @@ function PlotTrainingTime( sampling_rates, original_model, model_errors, prefix 
     set(gca, 'xticklabel', xticklabels);
     xlabel('Sampling Rate');
     ylabel(['Model Error for ', num2str(i), OrdinalSuffix(i) ,' dimension (%)']);
-    saveas(gcf, strcat(prefix, '_model_error', num2str(i), '.png'));
+    saveas(gcf, strcat(prefix, '_model_error_', num2str(i), '.png'));
     close(findall(0,'type','figure','name','flashing'));
   end
 end
