@@ -4,7 +4,7 @@ function PlotModelError( sampling_rates, original_model, model_errors, prefix )
   [~, sorted_indices] = sort(abs(original_model), 'descend');
   for i = 1:3
     original_index = sorted_indices(i, 1);
-    plot(model_errors(original_index:original_index, :));
+    plot(model_errors(original_index:original_index, :) * 100);
     xticklabels = cell(num_sampling_rates);
     xticklabels = xticklabels(1, :);
     for j = 1:num_sampling_rates
