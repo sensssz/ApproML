@@ -1,5 +1,5 @@
 function PlotTrainingTime( sampling_rates, training_times, prefix )
-  close(findall(0,'type','figure','name','flashing'));
+  close all;
   num_sampling_rates = size(sampling_rates, 2);
   plot(training_times);
   xticklabels = cell(num_sampling_rates);
@@ -12,4 +12,5 @@ function PlotTrainingTime( sampling_rates, training_times, prefix )
   xlabel('Sampling Rate');
   ylabel('Training Time (s)');
   saveas(gcf, strcat(prefix, '_training_time.png'));
+  close all;
 end

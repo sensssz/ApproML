@@ -1,11 +1,22 @@
 function PlotModelError( sampling_rates, original_model, model_errors, prefix )
-  close(findall(0,'type','figure','name','flashing'));
+  close all;
   num_sampling_rates = size(sampling_rates, 2);
   [~, sorted_indices] = sort(abs(original_model), 'descend');
-  avg_error = mean(model_errors, 3);
+  xaxis = (1:num_sampling_rates)';
+  min_errors = min(model_errors, [], 3) * 100;
+  avg_errors = mean(model_errors, 3) * 100;
+  max_errors = max(model_errors, [], 3) * 100;
   for i = 1:3
     original_index = sorted_indices(i, 1);
-    plot(avg_error(original_index:original_index, :) * 100);
+    min_errs = (min_errors(original_index:original_index, :))';
+    avg_errs = (avg_errors(original_index:original_index, :))';
+    max_errs = (max_errors(original_index:original_index, :))';
+    bound_patch = patch([xaxis; xaxis(end:-1:1); xaxis(1)], [min_errs; max_errs(end:-1:1); min_errs(1)], 'r');
+    hold on;
+    error_line = line(xaxis, avg_errs);
+    hold off;
+    set(bound_patch, 'facecolor', [1 0.8 0.8], 'edgecolor', 'none');
+    set(error_line, 'color', 'r', 'marker', 'x');
     xticklabels = cell(num_sampling_rates);
     xticklabels = xticklabels(1, :);
     for j = 1:num_sampling_rates
@@ -16,7 +27,7 @@ function PlotModelError( sampling_rates, original_model, model_errors, prefix )
     xlabel('Sampling Rate');
     ylabel(['Model Error for ', num2str(i), OrdinalSuffix(i) ,' most important dimension (%)']);
     saveas(gcf, strcat(prefix, '_model_error_', num2str(i), '.png'));
-    close(findall(0,'type','figure','name','flashing'));
+    close all;
   end
 end
 

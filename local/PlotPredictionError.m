@@ -1,5 +1,4 @@
 function PlotPredictionError( sampling_rates, prediction_errors, against, prefix )
-  close(findall(0,'type','figure','name','flashing'));
   num_sampling_rates = size(sampling_rates, 2);
   xaxis = (1:num_sampling_rates)';
   min_errors = min(prediction_errors, [], 3);
@@ -20,6 +19,6 @@ function PlotPredictionError( sampling_rates, prediction_errors, against, prefix
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
   ylabel(['Prediction Error Against ', against ,' (%)']);
-  % legend('Min', 'Average', 'Max');
   saveas(gcf, strcat(prefix, '_prediction_error.png'));
+  close all;
 end
