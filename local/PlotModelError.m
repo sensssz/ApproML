@@ -10,7 +10,7 @@ function PlotModelError( sampling_rates, original_model, model_errors, prefix )
     for j = 1:num_sampling_rates
         xticklabels{j} = strcat(num2str(sampling_rates(1, j) * 100), '%');
     end
-    set(gca,'XTick',linspace(0, num_sampling_rates, num_sampling_rates));
+    set(gca,'XTick',linspace(1, num_sampling_rates, num_sampling_rates));
     set(gca, 'xticklabel', xticklabels);
     xlabel('Sampling Rate');
     ylabel(['Model Error for ', num2str(i), OrdinalSuffix(i) ,' most important dimension (%)']);
