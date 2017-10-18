@@ -1,10 +1,10 @@
 function PlotPredictionError( sampling_rates, prediction_errors, against, prefix )
   close(findall(0,'type','figure','name','flashing'));
   num_sampling_rates = size(sampling_rates, 2);
-  xaxis = 1:num_sampling_rates;
-  min_errors = min(prediction_errors, 3);
+  xaxis = (1:num_sampling_rates)';
+  min_errors = min(prediction_errors, [], 3);
   avg_errors = mean(prediction_errors, 3);
-  max_errors = min(prediction_errors, 3);
+  max_errors = max(prediction_errors, [], 3);
   bound_patch = patch([xaxis; xaxis(end:-1:1); xaxis(1)], [min_errors; max_errors(end:-1:1); min_errors(1)], 'r');
   hold on;
   error_line = line(xaxis, avg_errors);
