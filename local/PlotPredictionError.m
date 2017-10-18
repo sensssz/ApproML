@@ -1,7 +1,9 @@
-function PlotPredictionError( sampling_rates, prediction_errors, prefix )
+function PlotPredictionError( sampling_rates, prediction_errors_full_model, prediction_errors_truth, prefix )
   close(findall(0,'type','figure','name','flashing'));
   num_sampling_rates = size(sampling_rates, 2);
-  plot(prediction_errors * 100);
+  plot(prediction_errors_full_model * 100);
+  hold on;
+  plot(prediction_errors_truth * 100);
   xticklabels = cell(num_sampling_rates);
   xticklabels = xticklabels(1, :);
   for i = 1:num_sampling_rates
@@ -11,5 +13,6 @@ function PlotPredictionError( sampling_rates, prediction_errors, prefix )
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
   ylabel('Prediction Error (%)');
+  legend('Full Dataset Model', 'Groud Truth');
   saveas(gcf, strcat(prefix, '_prediction_error.png'));
 end
