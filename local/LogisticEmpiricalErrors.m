@@ -1,7 +1,7 @@
 function [ logistic_prediction_errors_avg, logistic_model_errors_avg ] = LogisticEmpiricalErrors( original_model, models, testset )
   original_prediction = sigmoid(testset * original_model) > 0.5;
   num_tests = size(testset, 1);
-  num_features = size(modeos, 1);
+  num_features = size(models, 1);
   num_models = size(models, 2);
   num_runs = size(models, 3);
   logistic_prediction_errors = zeros(1, num_models, num_runs);

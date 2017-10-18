@@ -1,6 +1,6 @@
 function [ linear_prediction_errors_avg, linear_model_errors_avg ] = LinearEmpiricalErrors( original_model, models, testset )
   original_prediction = testset * original_model;
-  num_features = size(modeos, 1);
+  num_features = size(models, 1);
   num_models = size(models, 2);
   num_runs = size(models, 3);
   linear_prediction_errors = zeros(1, num_models, num_runs);

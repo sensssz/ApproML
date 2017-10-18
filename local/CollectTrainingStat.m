@@ -7,7 +7,7 @@ function [ params, sampling_times, training_times, gvalues, error_bounds, ccs ] 
   training_times = zeros(1, num_sampling_rates, num_runs);
   gvalues = zeros(num_features, num_sampling_rates, num_runs);
   error_bounds = zeros(num_features, num_sampling_rates, num_runs);
-  ccs = zeros(num_features, num_sampling_rates, num_runs);
+  ccs = zeros(num_features, num_features, num_sampling_rates, num_runs);
   lambda = 1e-6;
   probability = 0.01;
   for i = 1:num_sampling_rates
@@ -19,7 +19,7 @@ function [ params, sampling_times, training_times, gvalues, error_bounds, ccs ] 
       training_times(1, i, j) = training_time;
       gvalues(:, i:i, j) = gvalue;
       error_bounds(:, i:i, j) = error_bound;
-      ccs(:, i:i, j) = cc;
+      ccs(:, :, i:i, j) = cc;
     end
   end
 end
