@@ -1,4 +1,4 @@
-function [ logistic_prediction_errors_full_model_avg, logistic_prediction_errors_truth_avg, logistic_model_errors_avg ] = LogisticEmpiricalErrors( original_model, models, testset, testlabel )
+function [ logistic_prediction_errors_full_model, logistic_prediction_errors_truth, logistic_model_errors ] = LogisticEmpiricalErrors( original_model, models, testset, testlabel )
   original_prediction = sigmoid(testset * original_model) > 0.5;
   num_tests = size(testset, 1);
   num_features = size(models, 1);
@@ -16,7 +16,4 @@ function [ logistic_prediction_errors_full_model_avg, logistic_prediction_errors
       logistic_model_errors(:, i:i, j) = abs((model - original_model) ./ original_model);
     end
   end
-  logistic_prediction_errors_full_model_avg = mean(logistic_prediction_errors_full_model, 3);
-  logistic_prediction_errors_truth_avg = mean(logistic_prediction_errors_truth, 3);
-  logistic_model_errors_avg = mean(logistic_model_errors, 3);
 end

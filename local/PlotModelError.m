@@ -2,9 +2,10 @@ function PlotModelError( sampling_rates, original_model, model_errors, prefix )
   close(findall(0,'type','figure','name','flashing'));
   num_sampling_rates = size(sampling_rates, 2);
   [~, sorted_indices] = sort(abs(original_model), 'descend');
+  avg_error = mean(model_errors, 3);
   for i = 1:3
     original_index = sorted_indices(i, 1);
-    plot(model_errors(original_index:original_index, :) * 100);
+    plot(avg_error(original_index:original_index, :) * 100);
     xticklabels = cell(num_sampling_rates);
     xticklabels = xticklabels(1, :);
     for j = 1:num_sampling_rates

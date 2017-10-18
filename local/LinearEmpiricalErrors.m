@@ -1,4 +1,4 @@
-function [ linear_prediction_errors_full_model_avg, linear_prediction_errors_truth_avg, linear_model_errors_avg ] = LinearEmpiricalErrors( original_model, models, testset, testlabel )
+function [ linear_prediction_errors_full_model, linear_prediction_errors_truth, linear_model_errors ] = LinearEmpiricalErrors( original_model, models, testset, testlabel )
   original_prediction = testset * original_model;
   num_features = size(models, 1);
   num_models = size(models, 2);
@@ -15,7 +15,4 @@ function [ linear_prediction_errors_full_model_avg, linear_prediction_errors_tru
       linear_model_errors(:, i:i, j) = abs((model - original_model) ./ original_model);
     end
   end
-  linear_prediction_errors_full_model_avg = mean(linear_prediction_errors_full_model, 3);
-  linear_prediction_errors_truth_avg = mean(linear_prediction_errors_truth, 3);
-  linear_model_errors_avg = mean(linear_model_errors, 3);
 end
