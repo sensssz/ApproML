@@ -1,5 +1,5 @@
 function [ params, sampling_times, training_times, gvalues, error_bounds, ccs ] = CollectTrainingStat( regression, trainf, trainl, sampling_rates )
-  num_runs = 100;
+  num_runs = 10;
   num_sampling_rates = size(sampling_rates, 2);
   num_features = size(trainf, 2);
   params = zeros(num_features, num_sampling_rates, num_runs);
@@ -12,7 +12,7 @@ function [ params, sampling_times, training_times, gvalues, error_bounds, ccs ] 
   probability = 0.01;
   for i = 1:num_sampling_rates
     sampling_rate = sampling_rates(1, i);
-    for j = 1:100
+    for j = 1:num_runs
       [param, sampling_time, training_time, gvalue, error_bound, cc] = regression(trainf, trainl, sampling_rate, lambda, probability);
       params(:, i:i, j) = param;
       sampling_times(1, i, j) = sampling_time;
