@@ -22,6 +22,7 @@ def read_and_copy(filename, out_file):
     values = [float(x) for x in parts]
     content.append(values)
     out_file.write(line)
+  in_file.close()
   return content
 
 
@@ -53,6 +54,7 @@ def main():
   new_records = []
   for _ in range(len(records), target_line_count):
     new_records.append(gen_new_record(records))
+  out_file.close()
 
 
 if __name__ == '__main__':
