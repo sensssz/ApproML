@@ -1,10 +1,11 @@
 function PlotModelErrorBound( original_model, sampling_rates, models, error_bounds, prefix )
   PlotBoundingProbabilities(original_model, sampling_rates, models, error_bounds, prefix);
+  close all;
   PlotVisalErrorBound(original_model, sampling_rates, models, error_bounds, prefix);
 end
 
 function PlotBoundingProbabilities( original_model, sampling_rates, models, error_bounds, prefix )
-  num_models = size(models, 1);
+  num_models = size(models, 2);
   num_runs = size(models, 3);
   bounding_probabilities = zeros(1, num_models);
   for i = 1:num_runs
@@ -40,27 +41,39 @@ function PlotVisalErrorBound( original_model, sampling_rates, models, error_boun
   num_sampling_rates = size(sampling_rates, 2);
   xaxis = (1:num_sampling_rates)';
   [~, sorted_indices] = sort(abs(original_model), 'descend');
-  model_size = size(original_model, 1);
   for i = 1:3
     original_index = sorted_indices(i, 1);
-    min_bound = min_bounds(original_index:original_index, :);
-    max_bound = max_bounds(original_index:original_index, :);
+    min_bound = (min_bounds(original_index:original_index, :))';
+    max_bound = (max_bounds(original_index:original_index, :))';
     bound_patch = patch([xaxis; xaxis(end:-1:1); xaxis(1)], [min_bound; max_bound(end:-1:1); min_bound(1)], 'r');
     hold on;
-    error_line = line(xaxis, ones(1, model_size) * original_model(original_index, 1));
+    error_line = line(xaxis, ones(num_sampling_rates, 1) * original_model(original_index, 1));
     hold off;
     set(bound_patch, 'facecolor', [1 0.8 0.8], 'edgecolor', 'none');
     set(error_line, 'color', 'r', 'marker', 'x');
     xticklabels = cell(num_sampling_rates);
     xticklabels = xticklabels(1, :);
-    for i = 1:num_sampling_rates
-        xticklabels{i} = strcat(num2str(sampling_rates(1, i) * 100), '%');
+    for j = 1:num_sampling_rates
+        xticklabels{j} = strcat(num2str(sampling_rates(1, j) * 100), '%');
     end
     set(gca,'XTick',linspace(1, num_sampling_rates, num_sampling_rates));
     set(gca, 'xticklabel', xticklabels);
     xlabel('Sampling Rate');
-    ylabel('Optimal Parameters And Bounds');
-    saveas(gcf, strcat(prefix, '_error_bound_visual.png'));
+    ylabel(['Optimal Parameters And Bounds for ', num2str(i), OrdinalSuffix(i) ,' most important dimension (%)']);
+    saveas(gcf, strcat(prefix, '_error_bound_visual_', num2str(i), '.png'));
     close all;
+  end
+end
+
+function [ suffix ] = OrdinalSuffix( i )
+  switch i
+    case 1
+      suffix = 'st';
+    case 2
+      suffix = 'nd';
+    case 3
+      suffix = 'rd';
+    otherwise
+      suffix = 'th';
   end
 end
