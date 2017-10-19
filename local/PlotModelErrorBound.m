@@ -47,12 +47,10 @@ function PlotVisalErrorBound( original_model, sampling_rates, models, error_boun
     original_index = sorted_indices(i, 1);
     model = (mean_models(original_index:original_index, :))';
     error_bound = (mean_errors(original_index:original_index, :))';
-    errorbar(xaxis, model, error_bound, 'r-x');
+    errorbar(xaxis, model, error_bound, '-x');
     hold on;
-    line(xaxis, ones(num_sampling_rates, 1) * original_model(original_index, 1));
+    plot(ones(num_sampling_rates, 1) * original_model(original_index, 1), '-+');
     hold off;
-    % set(bound, 'facecolor', [1 0.8 0.8], 'edgecolor', 'none');
-    % set(error_line, 'color', 'r', 'marker', 'x');
     xticklabels = cell(num_sampling_rates);
     xticklabels = xticklabels(1, :);
     for j = 1:num_sampling_rates
