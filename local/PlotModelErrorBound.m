@@ -38,19 +38,21 @@ end
 function PlotVisalErrorBound( original_model, sampling_rates, models, error_bounds, prefix )
   min_bounds = mean(models - error_bounds, 3);
   max_bounds = mean(models + error_bounds, 3);
+  mean_models = mean(models, 3);
+  mean_errors = mean(error_bounds, 3);
   num_sampling_rates = size(sampling_rates, 2);
   xaxis = (1:num_sampling_rates)';
   [~, sorted_indices] = sort(abs(original_model), 'descend');
   for i = 1:3
     original_index = sorted_indices(i, 1);
-    min_bound = (min_bounds(original_index:original_index, :))';
-    max_bound = (max_bounds(original_index:original_index, :))';
-    bound_patch = patch([xaxis; xaxis(end:-1:1); xaxis(1)], [min_bound; max_bound(end:-1:1); min_bound(1)], 'r');
+    model = (mean_models(original_index:original_index, :))';
+    error_bound = (mean_errors(original_index:original_index, :))';
+    errorbar(xaxis, model, error_bound, 'r-x');
     hold on;
-    error_line = line(xaxis, ones(num_sampling_rates, 1) * original_model(original_index, 1));
+    line(xaxis, ones(num_sampling_rates, 1) * original_model(original_index, 1));
     hold off;
-    set(bound_patch, 'facecolor', [1 0.8 0.8], 'edgecolor', 'none');
-    set(error_line, 'color', 'r', 'marker', 'x');
+    % set(bound, 'facecolor', [1 0.8 0.8], 'edgecolor', 'none');
+    % set(error_line, 'color', 'r', 'marker', 'x');
     xticklabels = cell(num_sampling_rates);
     xticklabels = xticklabels(1, :);
     for j = 1:num_sampling_rates
