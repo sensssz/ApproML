@@ -13,8 +13,8 @@ function PlotBoundingProbabilities( original_model, sampling_rates, models, erro
       model = models(:, j:j, i:i);
       error_bound = error_bounds(:, j:j, i:i);
       min_model = model - error_bound;
-      max_model = model - error_bound;
-      if sum(min_model >= original_model) == 0 && sum(max_model <= original_model) == 0
+      max_model = model + error_bound;
+      if sum(min_model > original_model) == 0 && sum(max_model < original_model) == 0
         bounding_probabilities(1, j) = bounding_probabilities(1, j) + 1;
       end
     end
@@ -59,7 +59,7 @@ function PlotVisalErrorBound( original_model, sampling_rates, models, error_boun
     set(gca,'XTick',linspace(1, num_sampling_rates, num_sampling_rates));
     set(gca, 'xticklabel', xticklabels);
     xlabel('Sampling Rate');
-    ylabel(['Optimal Parameters And Bounds for ', num2str(i), OrdinalSuffix(i) ,' most important dimension (%)']);
+    ylabel(['Optimal Parameters And Bounds for ', num2str(i), OrdinalSuffix(i) ,' most important dimension']);
     saveas(gcf, strcat(prefix, '_error_bound_visual_', num2str(i), '.png'));
     close all;
   end
