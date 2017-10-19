@@ -18,7 +18,11 @@ function PlotPredictionError( sampling_rates, prediction_errors, against, prefix
   set(gca,'XTick',linspace(1, num_sampling_rates, num_sampling_rates));
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
-  ylabel(['Prediction Error Against ', against ,' (%)']);
+  if (strcmp(prefix, 'logistic') == 1)
+    ylabel(['Prediction Error Against ', against ,' (%)']);
+  else
+    ylabel(['Prediction Error Against ', against]);
+  end
   saveas(gcf, strcat(prefix, '_prediction_error.png'));
   close all;
 end
