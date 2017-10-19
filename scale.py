@@ -36,7 +36,7 @@ def values_to_line(values):
 def gen_new_record(records):
   ''' Generate a new record.
   '''
-  record = records[random.randint(0, len(records))]
+  record = records[random.randint(0, len(records) - 1)]
   new_record = list(record)
   for i in range(FLAGS.feature_column_start, len(new_record)):
     new_record[i] = np.random.normal()
