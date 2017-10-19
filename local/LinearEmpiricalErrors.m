@@ -1,5 +1,5 @@
-function [ linear_prediction_errors_full_model, linear_prediction_errors_truth, linear_model_errors ] = LinearEmpiricalErrors( original_model, models, testset, testlabel )
-  original_prediction = testset * original_model;
+function [ linear_prediction_errors_full_model, linear_prediction_errors_truth, linear_model_errors ] = LinearEmpiricalErrors( original_model, models, testf, testl )
+  original_prediction = testf * original_model;
   num_features = size(models, 1);
   num_models = size(models, 2);
   num_runs = size(models, 3);
@@ -9,9 +9,9 @@ function [ linear_prediction_errors_full_model, linear_prediction_errors_truth, 
   for i = 1:num_models
     for j = 1:num_runs
       model = models(:, i:i, j);
-      predictions = testset * model;
+      predictions = testf * model;
       linear_prediction_errors_full_model(i, 1, j) = mean(abs(predictions - original_prediction));
-      linear_prediction_errors_truth(i, 1, j) = mean(abs(predictions - testlabel));
+      linear_prediction_errors_truth(i, 1, j) = mean(abs(predictions - testl));
       linear_model_errors(:, i:i, j) = abs((model - original_model) ./ original_model);
     end
   end
