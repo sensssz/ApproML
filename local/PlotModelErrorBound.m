@@ -36,8 +36,6 @@ function PlotBoundingProbabilities( original_model, sampling_rates, models, erro
 end
 
 function PlotVisalErrorBound( original_model, sampling_rates, models, error_bounds, prefix )
-  min_bounds = mean(models - error_bounds, 3);
-  max_bounds = mean(models + error_bounds, 3);
   mean_models = mean(models, 3);
   mean_errors = mean(error_bounds, 3);
   num_sampling_rates = size(sampling_rates, 2);
