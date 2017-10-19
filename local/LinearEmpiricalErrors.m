@@ -10,8 +10,8 @@ function [ linear_prediction_errors_full_model, linear_prediction_errors_truth, 
     for j = 1:num_runs
       model = models(:, i:i, j);
       predictions = testset * model;
-      linear_prediction_errors_full_model(i, 1, j) = abs(mean((predictions - original_prediction) ./ original_prediction));
-      linear_prediction_errors_truth(i, 1, j) = abs(mean((predictions - testlabel) ./ testlabel));
+      linear_prediction_errors_full_model(i, 1, j) = mean(abs(predictions - original_prediction));
+      linear_prediction_errors_truth(i, 1, j) = mean(abs(predictions - testlabel));
       linear_model_errors(:, i:i, j) = abs((model - original_model) ./ original_model);
     end
   end
