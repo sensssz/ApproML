@@ -51,9 +51,9 @@ def main():
   target_line_count = 900000000
   out_file = open('scaled_' + FLAGS.dataset, 'w')
   records = read_and_copy(FLAGS.dataset, out_file)
-  new_records = []
-  for _ in range(len(records), target_line_count):
-    new_records.append(gen_new_record(records))
+  for _ in range(len(records), target_line_count+1):
+    new_record = gen_new_record(records)
+    out_file.write(values_to_line(new_record))
   out_file.close()
 
 
