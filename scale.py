@@ -39,7 +39,7 @@ def gen_new_record(records):
   record = records[random.randint(0, len(records) - 1)]
   new_record = list(record)
   for i in range(FLAGS.feature_column_start, len(new_record)):
-    new_record[i] = np.random.normal()
+    new_record[i] += np.random.normal()
   if FLAGS.mode == 'linear':
     new_record[FLAGS.label_column] += np.random.normal()
   return new_record
