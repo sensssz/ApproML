@@ -53,7 +53,7 @@ def gen_new_record(records):
 def main():
   ''' Main function
   '''
-  target_line_count = 900000000
+  target_line_count = 800000000
   out_file = open('scaled_transcoding_mesurment.csv', 'w')
   records = read_and_copy('transcoding_mesurment.tsv', out_file)
   for _ in range(len(records), target_line_count+1):

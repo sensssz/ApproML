@@ -48,7 +48,7 @@ def gen_new_record(records):
 def main():
   ''' Main function
   '''
-  target_line_count = 900000000
+  target_line_count = 800000000
   out_file = open('scaled_' + FLAGS.dataset, 'w')
   records = read_and_copy(FLAGS.dataset, out_file)
   for _ in range(len(records), target_line_count+1):
