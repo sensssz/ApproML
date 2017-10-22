@@ -46,7 +46,7 @@ def gen_new_record(records):
   for i in range(len(new_record)):
     if 1<= i <= 3 or 16 <= i <= 18:
       continue
-    new_record[i] = np.random.normal()
+    new_record[i] += np.random.normal()
   return new_record
 
 
