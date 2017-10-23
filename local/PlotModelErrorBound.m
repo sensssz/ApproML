@@ -30,14 +30,16 @@ function PlotBoundingProbabilities( original_model, sampling_rates, models, erro
   set(gca,'XTick',linspace(1, num_sampling_rates, num_sampling_rates));
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
-  ylabel('Probability of Error Bounding for Sample Model (%)');
-  saveas(gcf, strcat(prefix, '_error_bound.png'));
+  ylabel('Probability of Error Bound Holding for Sample Model (%)');
+  saveas(gcf, strcat(prefix, '_model_error_bound.png'));
   close all;
 end
 
 function PlotVisalErrorBound( original_model, sampling_rates, models, error_bounds, prefix )
-  mean_models = mean(models, 3);
-  mean_errors = mean(error_bounds, 3);
+  % mean_models = mean(models, 3);
+  % mean_errors = mean(error_bounds, 3);
+  mean_models = squeeze(models(:, :, 1:1));
+  mean_errors = squeeze(error_bounds(:, :, 1:1));
   num_sampling_rates = size(sampling_rates, 2);
   xaxis = (1:num_sampling_rates)';
   [~, sorted_indices] = sort(abs(original_model), 'descend');
@@ -58,7 +60,7 @@ function PlotVisalErrorBound( original_model, sampling_rates, models, error_boun
     set(gca, 'xticklabel', xticklabels);
     xlabel('Sampling Rate');
     ylabel(['Optimal Parameters And Bounds for ', num2str(i), OrdinalSuffix(i) ,' most important dimension']);
-    saveas(gcf, strcat(prefix, '_error_bound_visual_', num2str(i), '.png'));
+    saveas(gcf, strcat(prefix, '_model_error_bound_visual_', num2str(i), '.png'));
     close all;
   end
 end

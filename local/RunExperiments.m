@@ -26,4 +26,5 @@ if do_linear
   PlotPredictionError(sampling_rates, linear_prediction_errors_truth, 'Ground Truth', 'linear_ground_truth');
   PlotModelError(sampling_rates, linear_full_params, linear_model_errors, 'linear');
   PlotModelErrorBound(linear_full_params, sampling_rates, linear_params, linear_error_bounds, 'linear');
+  PlotLinearPredictionErrorBound(linear_full_params, sampling_rates, linear_params, linear_error_bounds, testf);
 end
