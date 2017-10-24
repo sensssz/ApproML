@@ -31,7 +31,7 @@ function PlotBoundingProbabilities( original_model, sampling_rates, models, erro
   set(gca,'XTick',linspace(1, num_sampling_rates, num_sampling_rates));
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
-  ylabel('Probability of Error Bound Holding for Sample Model (%)');
+  ylabel({'Probability of Error Bound', 'Holding for Sample Model (%)'});
   saveas(gcf, strcat(prefix, '_model_error_bound.png'));
   close all;
 end

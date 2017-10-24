@@ -22,10 +22,11 @@ function PlotLinearPredictionErrorBound( original_model, sampling_rates, models,
   for i = 1:num_sampling_rates
       xticklabels{i} = strcat(num2str(sampling_rates(1, i) * 100), '%');
   end
+  set(gca,'FontSize',22);
   set(gca,'XTick',linspace(1, num_sampling_rates, num_sampling_rates));
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
-  ylabel('Probability of Error Bound Holding for Sample Prediction (%)');
+  ylabel({'Probability of Error Bound', 'Holding for Sample Prediction (%)'});
   saveas(gcf, 'linear_prediction_error_bound.png');
   close all;
 
