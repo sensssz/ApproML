@@ -15,10 +15,11 @@ function PlotPredictionError( sampling_rates, prediction_errors, against, prefix
   for i = 1:num_sampling_rates
       xticklabels{i} = strcat(num2str(sampling_rates(1, i) * 100), '%');
   end
+  set(gca,'FontSize',22);
   set(gca,'XTick',linspace(1, num_sampling_rates, num_sampling_rates));
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
-  ylabel(['Prediction Error Against ', against ,' (%)']);
+  ylabel({'Prediction Error Against', strcat(against ,' (%)')});
   saveas(gcf, strcat(prefix, '_prediction_error.png'));
   close all;
 end
