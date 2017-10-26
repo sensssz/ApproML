@@ -21,7 +21,7 @@ function PlotLogisticPredictionErrorBound( original_model, sampling_rates, model
   end
 
   num_sampling_rates = size(sampling_rates, 2);
-  plot(mean(bounding_probabilities) * 100 / num_runs);
+  plot(mean(bounding_probabilities) * 100);
   xticklabels = cell(num_sampling_rates);
   xticklabels = xticklabels(1, :);
   for i = 1:num_sampling_rates
