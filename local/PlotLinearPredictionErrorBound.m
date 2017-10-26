@@ -2,14 +2,15 @@ function PlotLinearPredictionErrorBound( original_model, sampling_rates, models,
   num_tests = size(testf, 1);
   num_models = size(models, 2);
   num_runs = size(models, 3);
+  abs_testf = abs(testf);
   original_prediction = testf * original_model;
   bounding_probabilities = zeros(num_runs, num_models);
   for i = 1:num_runs
     for j = 1:num_models
       model = models(:, j:j, i:i);
       error_bound = error_bounds(:, j:j, i:i);
-      min_prediction = testf * (model - error_bound);
-      max_prediction = testf * (model + error_bound);
+      min_prediction = testf * model - abs_testf * error_bound;
+      max_prediction = testf * model + abs_testf * error_bound;
       success = sum((min_prediction <= original_prediction) & (max_prediction >= original_prediction));
       bounding_probabilities(i, j) = success / num_tests;
     end

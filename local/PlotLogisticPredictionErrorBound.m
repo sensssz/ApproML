@@ -8,7 +8,8 @@ function PlotBoundingProbabilities( original_model, sampling_rates, models, erro
   num_models = size(models, 2);
   num_runs = size(models, 3);
   original_prediction = sigmoid(testf * original_model);
-  bounding_probabilities = zeros(num_runs, num_models);
+  prediction_probabilities = zeros(num_runs, num_models);
+  undeterminable_probabilities = zeros(num_runs, num_models);
   abs_testf = abs(testf);
   for i = 1:num_runs
     for j = 1:num_models
@@ -16,18 +17,21 @@ function PlotBoundingProbabilities( original_model, sampling_rates, models, erro
       error_bound = error_bounds(:, j:j, i:i);
       min_prediction = sigmoid(testf * model - abs_testf * error_bound);
       max_prediction = sigmoid(testf * model + abs_testf * error_bound);
-      bounded = (min_prediction <= original_prediction &...
-                 max_prediction >= original_prediction) |...
-                (min_prediction >= original_prediction &...
-                 max_prediction <= original_prediction);
-      success = sum(bounded & min_prediction < 0.5 & max_prediction < 0.5) +...
-                sum(bounded & min_prediction > 0.5 & max_prediction > 0.5);
-      bounding_probabilities(i, j) = success / num_tests;
+      determinable = (min_prediction < 0.5 & max_prediction < 0.5) |...
+                     (min_prediction > 0.5 & max_prediction > 0.5);
+      num_indeterminable = sum(~determinable);
+      undeterminable_probabilities(i, j) = num_indeterminable / num_tests;
+
+      correct = sum(determinable & min_prediction < 0.5 & original_prediction < 0.5) +...
+                sum(determinable & min_prediction > 0.5 & original_prediction > 0.5);
+      prediction_probabilities(i, j) = correct / (num_tests - num_indeterminable);
     end
   end
 
   num_sampling_rates = size(sampling_rates, 2);
-  plot(mean(bounding_probabilities) * 100);
+
+  % Plot prediction probability
+  plot(mean(prediction_probabilities) * 100);
   xticklabels = cell(num_sampling_rates);
   xticklabels = xticklabels(1, :);
   for i = 1:num_sampling_rates
@@ -39,6 +43,21 @@ function PlotBoundingProbabilities( original_model, sampling_rates, models, erro
   xlabel('Sampling Rate');
   ylabel({'Probability of Error Bound', 'Holding for Sample Prediction (%)'});
   saveas(gcf, 'logistic_prediction_error_bound.png');
+  close all;
+
+  % Plot undeterminable probability
+  plot(mean(undeterminable_probabilities) * 100);
+  xticklabels = cell(num_sampling_rates);
+  xticklabels = xticklabels(1, :);
+  for i = 1:num_sampling_rates
+    xticklabels{i} = strcat(num2str(sampling_rates(1, i) * 100), '%');
+  end
+  set(gca,'FontSize',22);
+  set(gca,'XTick',linspace(1, num_sampling_rates, num_sampling_rates));
+  set(gca, 'xticklabel', xticklabels);
+  xlabel('Sampling Rate');
+  ylabel({'Probability of Prediction', 'Being Undeterminable (%)'});
+  saveas(gcf, 'logistic_undeterminable_probability.png');
   close all;
 end
 
