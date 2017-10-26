@@ -13,6 +13,7 @@ if do_logistic
   PlotPredictionError(sampling_rates, logistic_prediction_errors_truth, 'Ground Truth', 'logistic_ground_truth');
   PlotModelError(sampling_rates, logistic_full_params, logistic_model_errors, 'logistic');
   PlotModelErrorBound(logistic_full_params, sampling_rates, logistic_params, logistic_error_bounds, 'logistic');
+  PlotLogisticPredictionErrorBound(logistic_full_params, sampling_rates, logistic_params, logistic_error_bounds, testf);
 end
 
 if do_linear
