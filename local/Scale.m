@@ -1,4 +1,4 @@
-function [ scaled ] = Scale( training_set )
-  rand_training = training_set + bsxfun(@times, randn(size(training_set)), mean(training_set));
-  scaled = [training_set; rand_training];
+function [ training_set ] = Scale( training_set, original )
+  rand_training = original + bsxfun(@times, randn(size(original)), mean(original));
+  training_set = [training_set; rand_training];
 end
