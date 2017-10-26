@@ -1,6 +1,6 @@
 function PlotLogisticPredictionErrorBound( original_model, sampling_rates, models, error_bounds, testf )
   PlotBoundingProbabilities(original_model, sampling_rates, models, error_bounds, testf);
-  PlotVisalErrorBound(original_model, sampling_rates, models, error_bounds, testf);
+  PlotVisalErrorBound(original_model, sampling_rates, models, error_bounds, testf(100:106, :));
 end
 
 function PlotBoundingProbabilities( original_model, sampling_rates, models, error_bounds, testf )
@@ -47,13 +47,14 @@ function PlotVisalErrorBound( original_model, sampling_rates, models, error_boun
   abs_testf = abs(testf);
   num_tests = size(testf, 1);
   y = sigmoid(testf * original_model);
+  colors = get(gca, 'colororder');
   for i = 1:num_sampling_rates
     xaxis = (1:num_tests)' + (num_tests+1) * (i-1);
     model = models(:, i:i, 1:1);
     error_bound = error_bounds(:, i:i, 1:1);
-    yneg = sigmoid(testf * model - abs_testf * error_bound);
-    ypos = sigmoid(testf * model + abs_testf * error_bound);
-    errorbar(xaxis, y, yneg, ypos, 'bo');
+    yneg = y - sigmoid(testf * model - abs_testf * error_bound);
+    ypos = sigmoid(testf * model + abs_testf * error_bound) - y;
+    errorbar(xaxis, y, yneg, ypos, 'x', 'color', colors(1:1, :));
     hold on;
   end
   for i = 1:num_sampling_rates-1
