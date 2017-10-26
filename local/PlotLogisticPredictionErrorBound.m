@@ -8,8 +8,8 @@ function PlotLogisticPredictionErrorBound( original_model, sampling_rates, model
     for j = 1:num_models
       model = models(:, j:j, i:i);
       error_bound = error_bounds(:, j:j, i:i);
-      min_prediction = sigmoid(testf * (model - error_bound));
-      max_prediction = sigmoid(testf * (model + error_bound));
+      min_prediction = sigmoid(testf * (model - sign(testf).*error_bound));
+      max_prediction = sigmoid(testf * (model + sign(testf).*error_bound));
       bounded = (min_prediction <= original_prediction &...
                  max_prediction >= original_prediction) |...
                 (min_prediction >= original_prediction &...
@@ -25,7 +25,7 @@ function PlotLogisticPredictionErrorBound( original_model, sampling_rates, model
   xticklabels = cell(num_sampling_rates);
   xticklabels = xticklabels(1, :);
   for i = 1:num_sampling_rates
-      xticklabels{i} = strcat(num2str(sampling_rates(1, i) * 100), '%');
+    xticklabels{i} = strcat(num2str(sampling_rates(1, i) * 100), '%');
   end
   set(gca,'FontSize',22);
   set(gca,'XTick',linspace(1, num_sampling_rates, num_sampling_rates));
