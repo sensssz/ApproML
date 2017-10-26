@@ -1,22 +1,22 @@
 function PlotLinearPredictionErrorBound( original_model, sampling_rates, models, error_bounds, testf )
+  num_tests = size(testf, 1);
   num_models = size(models, 2);
   num_runs = size(models, 3);
   original_prediction = testf * original_model;
-  bounding_probabilities = zeros(1, num_models);
+  bounding_probabilities = zeros(num_runs, num_models);
   for i = 1:num_runs
     for j = 1:num_models
       model = models(:, j:j, i:i);
       error_bound = error_bounds(:, j:j, i:i);
       min_prediction = testf * (model - error_bound);
       max_prediction = testf * (model + error_bound);
-      if sum(min_prediction > original_prediction) == 0 && sum(max_prediction < original_prediction) == 0
-        bounding_probabilities(1, j) = bounding_probabilities(1, j) + 1;
-      end
+      success = sum((min_prediction <= original_prediction) & (max_prediction >= original_prediction));
+      bounding_probabilities(i, j) = success / num_tests;
     end
   end
 
   num_sampling_rates = size(sampling_rates, 2);
-  plot(bounding_probabilities * 100 / num_runs);
+  plot(mean(bounding_probabilities) * 100 / num_runs);
   xticklabels = cell(num_sampling_rates);
   xticklabels = xticklabels(1, :);
   for i = 1:num_sampling_rates
