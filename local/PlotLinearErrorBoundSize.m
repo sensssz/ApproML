@@ -11,7 +11,7 @@ function PlotLinearErrorBoundSize( sampling_rates, models, error_bounds, testf )
   end
 
   num_sampling_rates = size(sampling_rates, 2);
-  plot(mean(error_bound_sizes) * 100);
+  plot(mean(error_bound_sizes));
   xticklabels = cell(num_sampling_rates);
   xticklabels = xticklabels(1, :);
   for i = 1:num_sampling_rates
