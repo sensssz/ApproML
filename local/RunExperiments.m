@@ -14,6 +14,7 @@ if do_logistic
   PlotModelError(sampling_rates, logistic_full_params, logistic_model_errors, 'logistic');
   PlotModelErrorBound(logistic_full_params, sampling_rates, logistic_params, logistic_error_bounds, 'logistic');
   PlotLogisticPredictionErrorBound(logistic_full_params, sampling_rates, logistic_params, logistic_error_bounds, testf);
+  PlotLogisticErrorBoundSize(sampling_rates, logistic_params, logistic_error_bounds, testf);
 end
 
 if do_linear
@@ -28,4 +29,5 @@ if do_linear
   PlotModelError(sampling_rates, linear_full_params, linear_model_errors, 'linear');
   PlotModelErrorBound(linear_full_params, sampling_rates, linear_params, linear_error_bounds, 'linear');
   PlotLinearPredictionErrorBound(linear_full_params, sampling_rates, linear_params, linear_error_bounds, testf);
+  PlotLinearErrorBoundSize(sampling_rates, linear_params, linear_error_bounds, testf);
 end
