@@ -20,6 +20,7 @@ function PlotPredictionError( sampling_rates, prediction_errors, against, prefix
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
   ylabel({'Prediction Error Against', strcat(against ,' (%)')});
-  saveas(gcf, strcat(prefix, '_prediction_error.png'));
+  figname = strcat(prefix, '_prediction_error');
+  export_fig([figname,'.pdf'], '-pdf','-transparent');
   close all;
 end

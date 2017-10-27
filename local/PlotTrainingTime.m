@@ -12,6 +12,7 @@ function PlotTrainingTime( sampling_rates, training_times, prefix )
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
   ylabel('Training Time (s)');
-  saveas(gcf, strcat(prefix, '_training_time.png'));
+  figname = strcat(prefix, '_training_time');
+  export_fig([figname,'.pdf'], '-pdf','-transparent');
   close all;
 end

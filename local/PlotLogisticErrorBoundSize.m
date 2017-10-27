@@ -25,6 +25,7 @@ function PlotLogisticErrorBoundSize( sampling_rates, models, error_bounds, testf
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
   ylabel({'Size of Error Bound'});
-  saveas(gcf, 'logistic_prediction_error_bound_size.png');
+  figname = 'logistic_prediction_error_bound_size';
+  export_fig([figname,'.pdf'], '-pdf','-transparent');
   close all;
 end

@@ -22,6 +22,7 @@ function PlotLinearErrorBoundSize( sampling_rates, models, error_bounds, testf )
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
   ylabel({'Size of Error Bound'});
-  saveas(gcf, 'linear_prediction_error_bound_size.png');
+  figname = 'linear_prediction_error_bound_size';
+  export_fig([figname,'.pdf'], '-pdf','-transparent');
   close all;
 end

@@ -42,7 +42,8 @@ function PlotBoundingProbabilities( original_model, sampling_rates, models, erro
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
   ylabel({'Probability of Error Bound', 'Holding for Sample Prediction (%)'});
-  saveas(gcf, 'logistic_prediction_error_bound.png');
+  figname = 'logistic_prediction_error_bound';
+  export_fig([figname,'.pdf'], '-pdf','-transparent');
   close all;
 
   % Plot undeterminable probability
@@ -57,7 +58,8 @@ function PlotBoundingProbabilities( original_model, sampling_rates, models, erro
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
   ylabel({'Probability of Prediction', 'Being Undeterminable (%)'});
-  saveas(gcf, 'logistic_undeterminable_probability.png');
+  figname = 'logistic_undeterminable_probability';
+  export_fig([figname,'.pdf'], '-pdf','-transparent');
   close all;
 end
 
@@ -92,6 +94,7 @@ function PlotVisalErrorBound( original_model, sampling_rates, models, error_boun
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
   ylabel({'Visualization of Error', 'Bounds for Predictions'});
-  saveas(gcf, strcat('logistic_model_error_bound_visual.png'));
+  figname = strcat('logistic_model_error_bound_visual');
+  export_fig([figname,'.pdf'], '-pdf','-transparent');
   close all;
 end

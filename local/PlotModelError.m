@@ -27,7 +27,8 @@ function PlotModelError( sampling_rates, original_model, model_errors, prefix )
     set(gca, 'xticklabel', xticklabels);
     xlabel('Sampling Rate');
     ylabel({strcat('Model Error for ', num2str(i), OrdinalSuffix(i)) ,' most important dimension (%)'});
-    saveas(gcf, strcat(prefix, '_model_error_', num2str(i), '.png'));
+    figname = strcat(prefix, '_model_error_', num2str(i));
+    export_fig([figname,'.pdf'], '-pdf','-transparent');
     close all;
   end
 end

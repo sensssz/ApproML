@@ -12,7 +12,8 @@ function PlotModelCdf( sampling_rates, original_model, models, prefix )
       hold on;
       plot(xvalues, yvalues);
       title([num2str(i), OrdinalSuffix(i), '-', num2str(sampling_rates(1, j))]);
-      saveas(gcf, strcat(prefix, '_cdf_', num2str(i), OrdinalSuffix(i), '_', num2str(sampling_rates(1, j)), '.png'));
+      figname = strcat(prefix, '_cdf_', num2str(i), OrdinalSuffix(i), '_', num2str(sampling_rates(1, j)));
+      export_fig([figname,'.pdf'], '-pdf','-transparent');
       close all;
     end
   end
