@@ -1,6 +1,8 @@
 function [ prob_params, prob_sampling_times, prob_training_times, prob_gvalues, prob_error_bounds, prob_ccs ] = VaryProbability( regression, probabilities, trainf, trainl, params, sampling_times, training_times, gvalues, error_bounds, ccs )
   sampling_rate = 0.01;
-  num_probabilities = size(probabilities, 2) + 1;
+  lambda = 1e-6;
+  num_features = size(trainf, 2);
+  num_probabilities = size(probabilities, 2);
   prob_params = zeros(num_features, num_probabilities);
   prob_sampling_times = zeros(1, num_probabilities);
   prob_training_times = zeros(1, num_probabilities);
