@@ -85,7 +85,6 @@ function PlotVisualErrorBound( original_model, sampling_rates, models, error_bou
     index = i * (num_tests + 1);
     plot([index, index], ylim, '--r');
   end
-  plot([num_tests + 1, num_tests + 1], ylim, '--r');
   plot(xlim, [0.5, 0.5], '--r');
   xticklabels = cell(num_sampling_rates);
   xticklabels = xticklabels(1, :);
@@ -97,7 +96,7 @@ function PlotVisualErrorBound( original_model, sampling_rates, models, error_bou
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
   ylabel({'Visualization of Error', 'Bounds for Predictions'});
-  figname = strcat('logistic_model_error_bound_visual');
+  figname = strcat('logistic_prediction_error_bound_visual');
   export_fig([figname,'.pdf'], '-pdf','-transparent');
   close all;
 end

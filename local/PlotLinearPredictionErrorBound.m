@@ -69,7 +69,7 @@ function PlotVisualErrorBound( original_model, sampling_rates, models, error_bou
   set(gca, 'xticklabel', xticklabels);
   xlabel('Sampling Rate');
   ylabel({'Visualization of Error', 'Bounds for Predictions'});
-  figname = strcat('linear_model_error_bound_visual');
+  figname = strcat('linear_prediction_error_bound_visual');
   export_fig([figname,'.pdf'], '-pdf','-transparent');
   close all;
 end
