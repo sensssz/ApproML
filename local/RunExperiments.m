@@ -17,7 +17,7 @@ if do_logistic
   PlotLogisticPredictionErrorBound(full_params, sampling_rates, params, error_bounds, testf);
   PlotLogisticErrorBoundSize(sampling_rates, params, error_bounds, testf);
 
-  [ prob_params, prob_sampling_times, prob_training_times, prob_gvalues, prob_error_bounds, prob_ccs ] = VaryProbability( @LogisticRegressionSample, deltas, trainf, trainl, params, sampling_times, training_times, gvalues, error_bounds, ccs );
+  [ prob_params, prob_sampling_times, prob_training_times, prob_gvalues, prob_error_bounds, prob_ccs ] = VaryProbability( @LogisticRegressionSample, deltas, trainf, trainl );
   PlotLogisticProbErrorBoundSize(deltas, prob_params, prob_error_bounds, testf);
 end
 
@@ -35,6 +35,6 @@ if do_linear
   PlotLinearPredictionErrorBound(full_params, sampling_rates, params, error_bounds, testf);
   PlotLinearErrorBoundSize(sampling_rates, params, error_bounds, testf);
 
-  [ prob_params, prob_sampling_times, prob_training_times, prob_gvalues, prob_error_bounds, prob_ccs ] = VaryProbability( @LinearRegressionSample, deltas, trainf, trainl, params, sampling_times, training_times, gvalues, error_bounds, ccs );
+  [ prob_params, prob_sampling_times, prob_training_times, prob_gvalues, prob_error_bounds, prob_ccs ] = VaryProbability( @LinearRegressionSample, deltas, trainf, trainl );
   PlotLinearProbErrorBoundSize(deltas, prob_params, prob_error_bounds, testf);
 end
