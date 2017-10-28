@@ -20,7 +20,7 @@ function PlotLinearProbErrorBoundSize( probabilities, models, error_bounds, test
   set(gca,'FontSize',22);
   set(gca,'XTick',linspace(1, num_probabilities, num_probabilities));
   set(gca, 'xticklabel', xticklabels);
-  xlabel('Value of \sigma');
+  xlabel('Value of \delta');
   ylabel({'Size of Error Bound'});
   figname = 'linear_prob_error_bound_size';
   export_fig([figname,'.pdf'], '-pdf','-transparent');
