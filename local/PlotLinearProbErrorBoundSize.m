@@ -1,14 +1,13 @@
 function PlotLinearProbErrorBoundSize( probabilities, models, error_bounds, testf )
   num_models = size(models, 2);
   abs_testf = abs(testf);
-  error_bound_sizes = zeros(num_models);
+  error_bound_sizes = zeros(1, num_models);
   for i = 1:num_models
     model = models(:, i:i);
     error_bound = error_bounds(:, i:i);
     min_prediction = sigmoid(testf * model - abs_testf * error_bound);
     max_prediction = sigmoid(testf * model + abs_testf * error_bound);
-    mean_size = mean(squeeze(max_prediction - min_prediction));
-    error_bound_sizes(i) = mean_size(1, 1);
+    error_bound_sizes(1, i) = mean(squeeze(max_prediction - min_prediction));
   end
 
   num_probabilities = size(probabilities, 2);
