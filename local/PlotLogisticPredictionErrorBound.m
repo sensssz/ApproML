@@ -1,8 +1,12 @@
 function PlotLogisticPredictionErrorBound( original_model, sampling_rates, models, error_bounds, testf )
   PlotBoundingProbabilities(original_model, sampling_rates, models, error_bounds, testf);
-  tests = testf(100:106, :);
+  tests = zeros(6, size(testf, 2));
+  tests(1:1, :) = testf(1002:1002, :);
   tests(2:2, :) = testf(10902445:10902445, :);
+  tests(3:3, :) = testf(2621:2621, :);
   tests(4:4, :) = testf(12431310:12431310, :);
+  tests(5:5, :) = testf(8556:8556, :);
+  tests(6:6, :) = testf(7046:7046, :);
   PlotVisualErrorBound(original_model, sampling_rates, models, error_bounds, tests);
 end
 
