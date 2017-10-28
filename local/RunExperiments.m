@@ -1,33 +1,37 @@
 lambda = 1e-6;
 % sampling_rates = [0.01 0.02 0.05 0.08 0.1 0.2 0.5 0.8];
 sampling_rates = [0.01 0.02 0.05 0.08 0.1];
+probabilities = [0.01 0.02 0.05 0.1 0.2 0.5];
 
 if do_logistic
   % Logistic regression
-  [logistic_full_params, logistic_full_time, logistic_full_gvalue] = LogisticRegression(trainf, trainl, lambda);
-  [logistic_params, logistic_sampling_times, logistic_training_times, logistic_gvalues, logistic_error_bounds, logistic_ccs] = CollectTrainingStat(@LogisticRegressionSample, trainf, trainl, sampling_rates);
-  logistic_plot_training_times = [mean(logistic_training_times, 3) logistic_full_time];
-  [logistic_prediction_errors_full_model, logistic_prediction_errors_truth, logistic_model_errors] = LogisticEmpiricalErrors(logistic_full_params, logistic_params, testf, testl);
-  PlotTrainingTime([sampling_rates 1], logistic_plot_training_times, 'logistic');
-  PlotPredictionError(sampling_rates, logistic_prediction_errors_full_model, 'Full Model', 'logistic_full_model');
-  PlotPredictionError(sampling_rates, logistic_prediction_errors_truth, 'Ground Truth', 'logistic_ground_truth');
-  PlotModelError(sampling_rates, logistic_full_params, logistic_model_errors, 'logistic');
-  PlotModelErrorBound(logistic_full_params, sampling_rates, logistic_params, logistic_error_bounds, 'logistic');
-  PlotLogisticPredictionErrorBound(logistic_full_params, sampling_rates, logistic_params, logistic_error_bounds, testf);
-  PlotLogisticErrorBoundSize(sampling_rates, logistic_params, logistic_error_bounds, testf);
+  [full_params, full_time, full_gvalue] = LogisticRegression(trainf, trainl, lambda);
+  [params, sampling_times, training_times, gvalues, error_bounds, ccs] = CollectTrainingStat(@LogisticRegressionSample, trainf, trainl, sampling_rates);
+  plot_training_times = [mean(training_times, 3) full_time];
+  [prediction_errors_full_model, prediction_errors_truth, model_errors] = LogisticEmpiricalErrors(full_params, params, testf, testl);
+  PlotTrainingTime([sampling_rates 1], plot_training_times, 'logistic');
+  PlotPredictionError(sampling_rates, prediction_errors_full_model, 'Full Model', 'full_model');
+  PlotPredictionError(sampling_rates, prediction_errors_truth, 'Ground Truth', 'ground_truth');
+  PlotModelError(sampling_rates, full_params, model_errors, 'logistic');
+  PlotModelErrorBound(full_params, sampling_rates, params, error_bounds, 'logistic');
+  PlotLogisticPredictionErrorBound(full_params, sampling_rates, params, error_bounds, testf);
+  PlotLogisticErrorBoundSize(sampling_rates, params, error_bounds, testf);
+
+  [ prob_params, prob_sampling_times, prob_training_times, prob_gvalues, prob_error_bounds, prob_ccs ] = VaryProbability( @LogisticRegressionSample, probabilities, trainf, trainl, params, sampling_times, training_times, gvalues, error_bounds, ccs );
+  PlotProbErrorBoundSize(probabilities, prob_params, prob_error_bounds, testf);
 end
 
 if do_linear
   % Linear regression
-  [linear_full_params, linear_full_time, linear_full_gvalue] = LinearRegression(trainf, trainl, lambda);
-  [linear_params, linear_sampling_times, linear_training_times, linear_gvalues, linear_error_bounds, linear_ccs] = CollectTrainingStat(@LinearRegressionSample, trainf, trainl, sampling_rates);
-  linear_plot_training_times = [mean(linear_training_times, 3) linear_full_time];
-  [linear_prediction_errors_full_model, linear_prediction_errors_truth, linear_model_errors] = LinearEmpiricalErrors(linear_full_params, linear_params, testf, testl);
-  PlotTrainingTime([sampling_rates 1], linear_plot_training_times, 'linear');
-  PlotPredictionError(sampling_rates, linear_prediction_errors_full_model, 'Full Model', 'linear_full_model');
-  PlotPredictionError(sampling_rates, linear_prediction_errors_truth, 'Ground Truth', 'linear_ground_truth');
-  PlotModelError(sampling_rates, linear_full_params, linear_model_errors, 'linear');
-  PlotModelErrorBound(linear_full_params, sampling_rates, linear_params, linear_error_bounds, 'linear');
-  PlotLinearPredictionErrorBound(linear_full_params, sampling_rates, linear_params, linear_error_bounds, testf);
-  PlotLinearErrorBoundSize(sampling_rates, linear_params, linear_error_bounds, testf);
+  [full_params, full_time, full_gvalue] = LinearRegression(trainf, trainl, lambda);
+  [params, sampling_times, training_times, gvalues, error_bounds, ccs] = CollectTrainingStat(@LinearRegressionSample, trainf, trainl, sampling_rates);
+  plot_training_times = [mean(training_times, 3) full_time];
+  [prediction_errors_full_model, prediction_errors_truth, model_errors] = LinearEmpiricalErrors(full_params, params, testf, testl);
+  PlotTrainingTime([sampling_rates 1], plot_training_times, 'linear');
+  PlotPredictionError(sampling_rates, prediction_errors_full_model, 'Full Model', 'full_model');
+  PlotPredictionError(sampling_rates, prediction_errors_truth, 'Ground Truth', 'ground_truth');
+  PlotModelError(sampling_rates, full_params, model_errors, 'linear');
+  PlotModelErrorBound(full_params, sampling_rates, params, error_bounds, 'linear');
+  PlotLinearPredictionErrorBound(full_params, sampling_rates, params, error_bounds, testf);
+  PlotLinearErrorBoundSize(sampling_rates, params, error_bounds, testf);
 end
