@@ -2,11 +2,12 @@ function [ params, sampling_times, training_times, model_error_bounds, predictio
   num_sampling_rates = size(sampling_rates, 2);
   num_examples = size(trainf, 1);
   num_features = size(trainf, 2);
+  num_tests = size(testf, 1);
   params = zeros(num_features, num_sampling_rates);
   sampling_times = zeros(1, num_sampling_rates);
   training_times = zeros(1, num_sampling_rates);
   model_error_bounds = zeros(num_features, 2, num_sampling_rates);
-  prediction_error_bounds = zeros(num_features, 2, num_sampling_rates);
+  prediction_error_bounds = zeros(num_tests, 2, num_sampling_rates);
   for i = 1:num_sampling_rates
     sample_rate = sampling_rates(1, i);
     sample_size = int32(num_examples * sample_rate);
