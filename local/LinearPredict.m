@@ -1,3 +1,3 @@
-function [ predictions ] = LinearPredict(model, testset)
+function [ predictions ] = LinearPredict(testset, model)
   predictions = testset * model;
 end
