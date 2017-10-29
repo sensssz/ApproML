@@ -61,7 +61,7 @@ function PlotModelBoundingProbabilities( original_model, sampling_rates, model_e
   end
 
   num_sampling_rates = size(sampling_rates, 2);
-  plot(bounding_probabilities * 100 / num_runs);
+  plot(bounding_probabilities);
   xticklabels = cell(num_sampling_rates);
   xticklabels = xticklabels(1, :);
   for i = 1:num_sampling_rates
@@ -89,7 +89,7 @@ function PlotPredictionBoundingProbabilities( original_prediction, sampling_rate
     bounding_probabilities(1, i) = success / num_predictions;
   end
 
-  plot(bounding_probabilities * 100 / num_runs);
+  plot(bounding_probabilities * 100);
   xticklabels = cell(num_sampling_rates);
   xticklabels = xticklabels(1, :);
   for i = 1:num_sampling_rates
