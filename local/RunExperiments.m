@@ -20,7 +20,7 @@ if do_logistic
   [prob_params, prob_sampling_times, prob_training_times, prob_gvalues, prob_error_bounds, prob_ccs] = VaryProbability( @LogisticRegressionSample, deltas, trainf, trainl );
   PlotLogisticProbErrorBoundSize(deltas, prob_params, prob_error_bounds, testf);
 
-  [bootstrap_params, sampling_times, bootstrap_training_times, bootstrap_model_error_bounds, bootstrap_prediction_error_bounds] = Bootstrap(full_params, sampling_rates, lambda, @LogisticRegression, @LogisticPredict, trainf, trainl, testf, testl, prefix);
+  [bootstrap_params, sampling_times, bootstrap_training_times, bootstrap_model_error_bounds, bootstrap_prediction_error_bounds] = Bootstrap(full_params, sampling_rates, lambda, @LogisticRegression, @LogisticPredict, trainf, trainl, testf, testl, 'bootstrap_logistic');
 end
 
 if do_linear
@@ -40,5 +40,5 @@ if do_linear
   [prob_params, prob_sampling_times, prob_training_times, prob_gvalues, prob_error_bounds, prob_ccs] = VaryProbability( @LinearRegressionSample, deltas, trainf, trainl );
   PlotLinearProbErrorBoundSize(deltas, prob_params, prob_error_bounds, testf);
 
-  [bootstrap_params, sampling_times, bootstrap_training_times, bootstrap_model_error_bounds, bootstrap_prediction_error_bounds] = Bootstrap(full_params, sampling_rates, lambda, @LinearRegression, @LinearPredict, trainf, trainl, testf, testl, prefix);
+  [bootstrap_params, sampling_times, bootstrap_training_times, bootstrap_model_error_bounds, bootstrap_prediction_error_bounds] = Bootstrap(full_params, sampling_rates, lambda, @LinearRegression, @LinearPredict, trainf, trainl, testf, testl, 'bootstrap_linear');
 end
