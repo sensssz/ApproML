@@ -32,7 +32,7 @@ function [ mean_param, training_time, model_error_bound, prediction_error_bound 
   num_samples = size(trainf, 1);
   num_features = size(trainf, 2);
   num_tests = size(testf, 1);
-  num_runs = 1;
+  num_runs = 100;
   params = zeros(num_features, num_runs);
   predictions = zeros(num_tests, num_runs);
   for i = 1:num_runs
