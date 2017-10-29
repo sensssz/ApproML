@@ -20,6 +20,7 @@ function [ params, sampling_times, training_times, model_error_bounds, predictio
     prediction_error_bounds(:, :, i:i) = prediction_error;
   end
 
+  PlotTrainingTime(sampling_rates, training_times, prefix);
   original_prediction = predict(original_model, testf);
   PlotModelBoundingProbabilities(original_model, sampling_rates, model_error_bounds, prefix);
   PlotPredictionBoundingProbabilities(original_prediction, sampling_rates, preidction_error_bounds, prefix);
