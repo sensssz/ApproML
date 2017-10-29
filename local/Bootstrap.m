@@ -24,7 +24,7 @@ function [ params, sampling_times, training_times, model_error_bounds, predictio
   PlotTrainingTime(sampling_rates, training_times, prefix);
   original_prediction = predict(testf, original_model);
   PlotModelBoundingProbabilities(original_model, sampling_rates, model_error_bounds, prefix);
-  PlotPredictionBoundingProbabilities(original_prediction, sampling_rates, preidction_error_bounds, prefix);
+  PlotPredictionBoundingProbabilities(original_prediction, sampling_rates, prediction_error_bounds, prefix);
 end
 
 function [ mean_param, training_time, model_error_bound, prediction_error_bound ] = BootstrapTrain( regression, predict, trainf, trainl, testf, lambda )
