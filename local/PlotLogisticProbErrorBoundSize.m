@@ -32,7 +32,7 @@ function PlotErrorBoundSize( deltas, models, error_bounds, testf )
   close all;
 end
 
-function PlotBoundingProbabilities( original_model, deltas, models, error_bounds, testf )
+function PlotBoundingProbabilities( deltas, original_model, models, error_bounds, testf )
   num_tests = size(testf, 1);
   num_models = size(models, 2);
   num_runs = size(models, 3);
