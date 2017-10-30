@@ -1,4 +1,4 @@
-function PlotLogisticProbErrorBoundSize( deltas, models, error_bounds, testf )
+function PlotLogisticProbErrorBoundSize( deltas, original_model, models, error_bounds, testf )
   PlotErrorBoundSize(deltas, models, error_bounds, testf);
   PlotBoundingProbabilities(deltas, original_model, models, error_bounds, testf);
 end

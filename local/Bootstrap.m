@@ -28,7 +28,7 @@ function [ params, sampling_times, training_times, model_error_bounds, predictio
 end
 
 function [ mean_param, training_time, model_error_bound, prediction_error_bound ] = BootstrapTrain( regression, predict, trainf, trainl, testf, lambda )
-  tic;
+  starttime = tic;
   num_samples = size(trainf, 1);
   num_features = size(trainf, 2);
   num_tests = size(testf, 1);
@@ -42,7 +42,7 @@ function [ mean_param, training_time, model_error_bound, prediction_error_bound 
     params(:, i:i) = param;
     predictions(:, i:i) = predict(testf, param);
   end
-  training_time = toc;
+  training_time = toc(starttime);
   mean_param = mean(params, 2);
   model_error_bound = [ prctile(params, 1, 2) prctile(params, 99, 2) ];
   prediction_error_bound = [ prctile(predictions, 1, 2) prctile(predictions, 99, 2) ];

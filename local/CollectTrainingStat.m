@@ -1,5 +1,5 @@
 function [ params, sampling_times, training_times, gvalues, error_bounds, ccs ] = CollectTrainingStat( regression, trainf, trainl, sampling_rates )
-  num_runs = 10;
+  num_runs = 5;
   num_sampling_rates = size(sampling_rates, 2);
   num_features = size(trainf, 2);
   params = zeros(num_features, num_sampling_rates, num_runs);
