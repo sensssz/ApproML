@@ -1,7 +1,7 @@
 lambda = 1e-6;
 % sampling_rates = [0.01 0.02 0.05 0.08 0.1 0.2 0.5 0.8];
 sampling_rates = [0.01 0.02 0.05 0.1 0.2 0.5];
-deltas = [0.001 0.002 0.005 0.01 0.02 0.05 0.1 0.2];
+deltas = [0.01 0.02 0.05 0.1 0.2];
 
 if do_logistic
   % Logistic regression
