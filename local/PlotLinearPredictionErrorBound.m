@@ -49,7 +49,7 @@ function PlotVisualErrorBound( original_model, sampling_rates, models, error_bou
     xaxis = (1:num_tests)' + (num_tests+1) * (i-1);
     model = models(:, i:i, 1:1);
     error_bound = error_bounds(:, i:i, 1:1);
-    yneg = y - testf * model - abs_testf * error_bound;
+    yneg = y - testf * model + abs_testf * error_bound;
     ypos = testf * model + abs_testf * error_bound - y;
     errorbar(xaxis, y, yneg, ypos, 'x', 'color', colors(1:1, :));
     hold on;
